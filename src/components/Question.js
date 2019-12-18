@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import { Button, Card, Image } from 'semantic-ui-react';
 
 class Question extends Component {
+  handleViewPoll = (e, id) => {
+    e.preventDefault();
+    //Todo: Redirect to question poll
+  };
+
   render() {
-    const { authedUser, question, author } = this.props;
+    const { authedUser, question, author, id } = this.props;
     return (
       <div>
         <Card>
@@ -22,7 +27,7 @@ class Question extends Component {
             <Card.Description>{`...${question.optionOne.text}`}</Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Button fluid basic>
+            <Button fluid basic onClick={e => this.handleViewPoll(e, id)}>
               View Poll
             </Button>
           </Card.Content>
