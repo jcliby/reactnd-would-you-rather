@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleAddAnswer } from '../actions/questions';
 import { Button, Card, Image, Radio } from 'semantic-ui-react';
 
 class Poll extends Component {
@@ -13,8 +14,21 @@ class Poll extends Component {
     }));
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    const { value } = this.state;
+    const { dispatch, authedUser, id } = this.props;
+    dispatch(
+      handleAddAnswer({
+        authedUser,
+        qid: id,
+        answer: value
+      })
+    );
+  };
+
   render() {
-    const { authedUser, question, author, id } = this.props;
+    const { authedUser, question, author } = this.props;
     return (
       <div>
         <Card>
@@ -45,7 +59,7 @@ class Poll extends Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Button fluid basic>
+            <Button fluid basic onClick={this.handleSubmit}>
               Submit
             </Button>
           </Card.Content>
