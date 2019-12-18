@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
 import User from './User';
 
 class Leaderboard extends Component {
@@ -15,11 +14,9 @@ class Leaderboard extends Component {
   render() {
     const { userInfos } = this.props;
     return (
-      <Grid centered columns={3}>
-        <Grid.Column>
-          <ul>{this.renderUser(userInfos)}</ul>
-        </Grid.Column>
-      </Grid>
+      <div>
+        <ul>{this.renderUser(userInfos)}</ul>
+      </div>
     );
   }
 }
