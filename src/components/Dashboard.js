@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
+import { Tab } from 'semantic-ui-react';
 import Question from './Question';
 
 class Dashboard extends Component {
@@ -14,18 +14,29 @@ class Dashboard extends Component {
 
   render() {
     const { unansweredQuestionIds, answeredQuestionIds } = this.props;
+
+    const panes = [
+      {
+        menuItem: 'Unanswered Questions',
+        render: () => (
+          <Tab.Pane>
+            <ul>{this.renderQuestions(unansweredQuestionIds)}</ul>
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: 'Answered Questions',
+        render: () => (
+          <Tab.Pane>
+            <ul>{this.renderQuestions(answeredQuestionIds)}</ul>
+          </Tab.Pane>
+        )
+      }
+    ];
+
     return (
       <div>
-        <Grid divided="vertically">
-          <Grid.Row columns={2}>
-            <Grid.Column>
-              <ul>{this.renderQuestions(unansweredQuestionIds)}</ul>
-            </Grid.Column>
-            <Grid.Column>
-              <ul>{this.renderQuestions(answeredQuestionIds)}</ul>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <Tab menu={{ attached: true, tabular: false }} panes={panes} />
       </div>
     );
   }
