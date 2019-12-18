@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
+import Question from './Question';
 
 class Dashboard extends Component {
-  renderQuestions = questionKeys => {
-    return questionKeys.map(key => (
-      <li key={key}>
-        <div>Q ID: {key}</div>
+  renderQuestions = questionIds => {
+    return questionIds.map(id => (
+      <li key={id}>
+        <Question id={id} />
       </li>
     ));
   };
 
   render() {
-    const { unansweredQuestionKeys, answeredQuestionKeys } = this.props;
+    const { unansweredQuestionIds, answeredQuestionIds } = this.props;
     return (
       <div>
         <Grid divided="vertically">
           <Grid.Row columns={2}>
             <Grid.Column>
-              <ul>{this.renderQuestions(unansweredQuestionKeys)}</ul>
+              <ul>{this.renderQuestions(unansweredQuestionIds)}</ul>
             </Grid.Column>
             <Grid.Column>
-              <ul>{this.renderQuestions(answeredQuestionKeys)}</ul>
+              <ul>{this.renderQuestions(answeredQuestionIds)}</ul>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -31,25 +32,25 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps({ authedUser, questions }) {
-  const unansweredQuestionKeys = Object.keys(questions)
+  const unansweredQuestionIds = Object.keys(questions)
     .filter(
-      key =>
-        !questions[key].optionOne.votes.includes(authedUser) &&
-        !questions[key].optionTwo.votes.includes(authedUser)
+      id =>
+        !questions[id].optionOne.votes.includes(authedUser) &&
+        !questions[id].optionTwo.votes.includes(authedUser)
     )
     .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 
-  const answeredQuestionKeys = Object.keys(questions)
+  const answeredQuestionIds = Object.keys(questions)
     .filter(
-      key =>
-        questions[key].optionOne.votes.includes(authedUser) ||
-        questions[key].optionTwo.votes.includes(authedUser)
+      id =>
+        questions[id].optionOne.votes.includes(authedUser) ||
+        questions[id].optionTwo.votes.includes(authedUser)
     )
     .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 
   return {
-    unansweredQuestionKeys,
-    answeredQuestionKeys
+    unansweredQuestionIds,
+    answeredQuestionIds
   };
 }
 
