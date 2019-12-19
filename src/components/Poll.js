@@ -53,7 +53,7 @@ class Poll extends Component {
                 <Card.Description>
                   <Radio
                     label={question.optionOne.text}
-                    value={'optionOne'}
+                    value="optionOne"
                     checked={this.state.value === 'optionOne'}
                     onChange={this.handleChange}
                   />
@@ -67,7 +67,7 @@ class Poll extends Component {
               </Card.Content>
               <Card.Content extra>
                 <Button fluid basic onClick={this.handleSubmit}>
-                  Submit
+                  Submit Answer
                 </Button>
               </Card.Content>
             </Card>
