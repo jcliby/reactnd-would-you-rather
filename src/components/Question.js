@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button, Card, Image } from 'semantic-ui-react';
 
 class Question extends Component {
-  handleViewPoll = (e, id) => {
+  handleViewPoll = e => {
     e.preventDefault();
-    //Todo: Redirect to question poll
+    const { history, id } = this.props;
+    history.push(`/question/${id}`);
   };
 
   render() {
-    const { authedUser, question, author, id } = this.props;
+    const { authedUser, question, author } = this.props;
     return (
       <div>
         <Card>
@@ -27,7 +29,7 @@ class Question extends Component {
             <Card.Description>{`...${question.optionOne.text}`}</Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Button fluid basic onClick={e => this.handleViewPoll(e, id)}>
+            <Button fluid basic onClick={e => this.handleViewPoll(e)}>
               View Poll
             </Button>
           </Card.Content>
@@ -47,4 +49,4 @@ function mapStateToProps({ authedUser, questions, users }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));

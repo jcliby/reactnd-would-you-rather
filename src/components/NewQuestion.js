@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, Input } from 'semantic-ui-react';
 import { handleAddQuestion } from '../actions/questions';
+import { Redirect } from 'react-router-dom';
 
 class NewQuestion extends Component {
   state = {
     optionOneText: '',
-    optionTwoText: ''
+    optionTwoText: '',
+    toHome: false
   };
 
   handleChange = (e, data) => {
@@ -21,10 +23,21 @@ class NewQuestion extends Component {
     const { optionOneText, optionTwoText } = this.state;
     const { dispatch, authedUser } = this.props;
     dispatch(handleAddQuestion({ optionOneText, optionTwoText, authedUser }));
+
+    this.setState(() => ({
+      optionOneText: '',
+      optionTwoText: '',
+      toHome: true
+    }));
   };
 
   render() {
-    const { optionOneText, optionTwoText } = this.state;
+    const { optionOneText, optionTwoText, toHome } = this.state;
+
+    if (toHome === true) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div>
         <Card>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { handleAddAnswer } from '../actions/questions';
 import { Button, Card, Image, Radio, Message } from 'semantic-ui-react';
 
@@ -105,8 +106,10 @@ class Poll extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, questions, users }, { id }) {
+function mapStateToProps({ authedUser, questions, users }, props) {
+  const { id } = props.match.params;
   const question = questions[id];
+  console.log('HEREREE:', question);
   const author = users[question.author];
   let answer = null;
 
@@ -126,4 +129,4 @@ function mapStateToProps({ authedUser, questions, users }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(Poll);
+export default withRouter(connect(mapStateToProps)(Poll));
