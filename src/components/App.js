@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
+import ProtectedRoute from './ProtectedRoute';
 import Dashboard from './Dashboard';
 import Leaderboard from './Leaderboard';
 import Poll from './Poll';
@@ -27,10 +28,14 @@ class App extends Component {
             {this.props.loading === true ? null : (
               <div>
                 <Route path="/login" exact component={Login} />
-                <Route path="/" exact component={Dashboard} />
-                <Route path="/add" exact component={NewQuestion} />
-                <Route path="/question/:id" exact component={Poll} />
-                <Route path="/leaderboard" exact component={Leaderboard} />
+                <ProtectedRoute path="/" exact component={Dashboard} />
+                <ProtectedRoute path="/add" exact component={NewQuestion} />
+                <ProtectedRoute path="/question/:id" exact component={Poll} />
+                <ProtectedRoute
+                  path="/leaderboard"
+                  exact
+                  component={Leaderboard}
+                />
               </div>
             )}
           </div>

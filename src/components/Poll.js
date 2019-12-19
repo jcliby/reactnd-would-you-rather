@@ -26,6 +26,9 @@ class Poll extends Component {
         answer: value
       })
     );
+    this.setState(() => ({
+      value: ''
+    }));
   };
 
   render() {
@@ -122,6 +125,7 @@ function mapStateToProps({ authedUser, questions, users }, props) {
   }
 
   return {
+    id,
     authedUser,
     question,
     author,

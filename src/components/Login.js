@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { setAuthedUser } from '../actions/authedUser';
 import { Button, Card, Dropdown } from 'semantic-ui-react';
 
 class Login extends Component {
   state = {
-    selectedUserId: ''
+    selectedUserId: '',
+    toHome: false
   };
 
   handleChange = (e, data) => {
@@ -19,10 +21,19 @@ class Login extends Component {
     const { selectedUserId } = this.state;
     const { dispatch } = this.props;
     dispatch(setAuthedUser(selectedUserId));
+    this.setState(() => ({
+      selectedUserId: '',
+      toHome: true
+    }));
   };
 
   render() {
     const { userSelections } = this.props;
+    const { toHome } = this.state;
+
+    if (toHome === true) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div>
