@@ -20,12 +20,11 @@ class NewQuestion extends Component {
     e.preventDefault();
     const { optionOneText, optionTwoText } = this.state;
     const { dispatch, authedUser } = this.props;
-    dispatch(handleAddQuestion(optionOneText, optionTwoText, authedUser));
+    dispatch(handleAddQuestion({ optionOneText, optionTwoText, authedUser }));
   };
 
   render() {
     const { optionOneText, optionTwoText } = this.state;
-    console.log('STATEEE:', this.state);
     return (
       <div>
         <Card>
@@ -49,7 +48,7 @@ class NewQuestion extends Component {
             <Button
               fluid
               basic
-              onClick=""
+              onClick={this.handleSubmit}
               disabled={optionOneText === '' || optionTwoText === ''}
             >
               Submit Question
