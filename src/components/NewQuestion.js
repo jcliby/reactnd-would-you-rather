@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, Input } from 'semantic-ui-react';
+import { handleAddQuestion } from '../actions/questions';
 
 class NewQuestion extends Component {
   state = {
@@ -13,6 +14,13 @@ class NewQuestion extends Component {
     this.setState(() => ({
       [name]: value
     }));
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { optionOneText, optionTwoText } = this.state;
+    const { dispatch, authedUser } = this.props;
+    dispatch(handleAddQuestion(optionOneText, optionTwoText, authedUser));
   };
 
   render() {

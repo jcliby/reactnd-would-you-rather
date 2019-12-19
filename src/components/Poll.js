@@ -8,9 +8,9 @@ class Poll extends Component {
     value: ''
   };
 
-  handleChange = (e, { value }) => {
+  handleChange = (e, data) => {
     this.setState(() => ({
-      value
+      value: data.value
     }));
   };
 
