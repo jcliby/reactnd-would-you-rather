@@ -13,7 +13,10 @@ import LoadingBar from 'react-redux-loading';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    const { dispatch, loading } = this.props;
+    if (loading === true) {
+      dispatch(handleInitialData());
+    }
   }
   render() {
     return (
@@ -45,9 +48,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ users }) {
+  let loading = true;
+  if (Object.keys(users).length > 0) {
+    loading = false;
+  }
+
   return {
-    loading: authedUser === true
+    loading: loading
   };
 }
 

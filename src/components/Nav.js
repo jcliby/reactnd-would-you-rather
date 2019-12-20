@@ -1,63 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
+import { logOut } from '../actions/authedUser';
 
 class Nav extends Component {
-  state = {};
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleLogout = e => {
+    e.preventDefault();
+    const { history, dispatch } = this.props;
+    dispatch(logOut());
+    history.push('/login');
+  };
 
   render() {
-    const { activeItem } = this.state;
-
+    const { authedUser } = this.props;
     return (
-      <Menu>
-        <Menu.Item
-          as={NavLink}
-          name="home"
-          active={activeItem === 'home'}
-          onClick={this.handleItemClick}
-          exact
-          to="/"
-        >
-          Home
-        </Menu.Item>
+      <div>
+        {authedUser === null ? null : (
+          <Menu>
+            <Menu.Item as={NavLink} name="home" exact to="/">
+              Home
+            </Menu.Item>
 
-        <Menu.Item
-          as={NavLink}
-          name="newQuestion"
-          active={activeItem === 'newQuestion'}
-          onClick={this.handleItemClick}
-          exact
-          to="/add"
-        >
-          New Question
-        </Menu.Item>
+            <Menu.Item as={NavLink} name="newQuestion" exact to="/add">
+              New Question
+            </Menu.Item>
 
-        <Menu.Item
-          as={NavLink}
-          name="leaderBoard"
-          active={activeItem === 'leaderBoard'}
-          onClick={this.handleItemClick}
-          exact
-          to="/leaderboard"
-        >
-          Leader Board
-        </Menu.Item>
+            <Menu.Item as={NavLink} name="leaderBoard" exact to="/leaderboard">
+              Leader Board
+            </Menu.Item>
 
-        <Menu.Item
-          as={NavLink}
-          name="logOut"
-          active={activeItem === 'logOut'}
-          onClick={this.handleItemClick}
-          position="right"
-          exact
-          to="/login"
-        >
-          Log Out
-        </Menu.Item>
-      </Menu>
+            <Menu.Item
+              name="logOut"
+              position="right"
+              onClick={this.handleLogout}
+            >
+              Log Out
+            </Menu.Item>
+          </Menu>
+        )}
+      </div>
     );
   }
 }
@@ -68,4 +50,4 @@ function mapStateToProps({ authedUser }) {
   };
 }
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));

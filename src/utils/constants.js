@@ -3,3 +3,4 @@ export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const ADD_ANSWER = 'ADD_ANSWER';
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const LOG_OUT = 'LOG_OUT';
