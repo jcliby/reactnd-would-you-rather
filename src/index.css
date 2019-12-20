@@ -3,8 +3,50 @@ li {
   margin-top: 15px;
 }
 
+.ui input {
+  margin: 20px;
+}
+
 .container {
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 25px;
+}
+
+.dashboard-container {
+  padding-top: 25px;
+}
+
+.leader-board-container {
+  padding-top: 50px;
+}
+
+.new-question-container {
+  padding-top: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.poll-container {
+  padding-top: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-list-item {
+  display: flex;
+  justify-content: center;
+}
+
+.leader-board-list-item {
+  display: flex;
+  justify-content: center;
+}
+
+.new-question-input {
+  margin-top: 15px;
+}
+
+.question-radio {
+  padding: 15px;
 }

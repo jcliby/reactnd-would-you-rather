@@ -6,7 +6,7 @@ import Question from './Question';
 class Dashboard extends Component {
   renderQuestions = questionIds => {
     return questionIds.map(id => (
-      <li key={id}>
+      <li className="dashboard-list-item" key={id}>
         <Question id={id} />
       </li>
     ));
@@ -35,7 +35,7 @@ class Dashboard extends Component {
     ];
 
     return (
-      <div>
+      <div className="dashboard-container">
         <Tab menu={{ attached: true, tabular: false }} panes={panes} />
       </div>
     );

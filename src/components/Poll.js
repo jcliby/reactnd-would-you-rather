@@ -39,7 +39,7 @@ class Poll extends Component {
     const totalVotes = optionOneVotes + optionTwoVotes;
 
     return (
-      <div>
+      <div className="poll-container">
         {answer === null ? (
           <div>
             <Card>
@@ -56,12 +56,14 @@ class Poll extends Component {
                 </Card.Meta>
                 <Card.Description>
                   <Radio
+                    className="question-radio"
                     label={question.optionOne.text}
                     value="optionOne"
                     checked={this.state.value === 'optionOne'}
                     onChange={this.handleChange}
                   />
                   <Radio
+                    className="question-radio"
                     label={question.optionTwo.text}
                     value="optionTwo"
                     checked={this.state.value === 'optionTwo'}

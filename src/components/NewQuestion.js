@@ -39,18 +39,20 @@ class NewQuestion extends Component {
     }
 
     return (
-      <div>
+      <div className="new-question-container">
         <Card>
           <Card.Content>
             <Card.Header>Would you rather...</Card.Header>
             <Card.Description>Provide two options.</Card.Description>
             <Input
+              className="new-question-input"
               placeholder="Option one..."
               name="optionOneText"
               value={optionOneText}
               onChange={this.handleChange}
             />
             <Input
+              className="new-question-input"
               placeholder="Option two..."
               name="optionTwoText"
               value={optionTwoText}
