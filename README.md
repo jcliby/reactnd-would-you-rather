@@ -21,7 +21,7 @@ $ git clone https://github.com/jcliby/reactnd-would-you-rather.git
 Move to project directory and install
 
 ```
-$ cd reactnd-project-myreads-starter
+$ cd reactnd-would-you-rather
 $ npm install
 ```
 
