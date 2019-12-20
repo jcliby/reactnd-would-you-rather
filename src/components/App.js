@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import ProtectedRoute from './ProtectedRoute';
@@ -10,6 +10,7 @@ import NewQuestion from './NewQuestion';
 import Login from './Login';
 import Nav from './Nav';
 import LoadingBar from 'react-redux-loading';
+import NoMatch from './NoMatch';
 
 class App extends Component {
   componentDidMount() {
@@ -29,7 +30,7 @@ class App extends Component {
           <div className="container">
             <Nav />
             {this.props.loading === true ? null : (
-              <div>
+              <Switch>
                 <Route path="/login" exact component={Login} />
                 <ProtectedRoute path="/" exact component={Dashboard} />
                 <ProtectedRoute path="/add" exact component={NewQuestion} />
@@ -39,7 +40,8 @@ class App extends Component {
                   exact
                   component={Leaderboard}
                 />
-              </div>
+                <Route component={NoMatch} />
+              </Switch>
             )}
           </div>
         </Fragment>

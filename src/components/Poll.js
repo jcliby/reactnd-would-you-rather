@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { handleAddAnswer } from '../actions/questions';
 import { Button, Card, Image, Radio, Message } from 'semantic-ui-react';
+import NoMatch from './NoMatch';
 
 class Poll extends Component {
   state = {
@@ -32,7 +33,11 @@ class Poll extends Component {
   };
 
   render() {
-    const { authedUser, question, author, answer } = this.props;
+    const { authedUser, question, author, answer, redirect } = this.props;
+
+    if (redirect === true) {
+      return <NoMatch />;
+    }
 
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
@@ -113,8 +118,16 @@ class Poll extends Component {
 
 function mapStateToProps({ authedUser, questions, users }, props) {
   const { id } = props.match.params;
+
+  let redirect = false;
+  if (questions[id] === undefined) {
+    redirect = true;
+    return {
+      redirect
+    };
+  }
+
   const question = questions[id];
-  console.log('HEREREE:', question);
   const author = users[question.author];
   let answer = null;
 
@@ -131,7 +144,8 @@ function mapStateToProps({ authedUser, questions, users }, props) {
     authedUser,
     question,
     author,
-    answer
+    answer,
+    redirect
   };
 }
 

@@ -31,11 +31,12 @@ class Login extends Component {
     const { userSelections, location } = this.props;
     const { redirect } = this.state;
 
-    const path =
-      location.state.redirectPath !== null ? location.state.redirectPath : '/';
+    const { from } = location.state || {
+      from: { pathname: '/' }
+    };
 
     if (redirect === true) {
-      return <Redirect to={path} />;
+      return <Redirect to={from} />;
     }
 
     return (

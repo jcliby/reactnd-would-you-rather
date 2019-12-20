@@ -35,6 +35,10 @@ li {
   justify-content: center;
 }
 
+.no-match-container {
+  text-align: center;
+}
+
 .login-dropdown {
   padding: 30px;
 }
