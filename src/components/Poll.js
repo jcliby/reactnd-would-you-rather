@@ -116,7 +116,9 @@ class Poll extends Component {
                       <Message.Header>{question.optionOne.text}</Message.Header>
                       <p>{`${optionOneVotes} out of ${totalVotes} votes`}</p>
                       <Progress
-                        percent={(optionOneVotes / totalVotes) * 100}
+                        percent={Math.round(
+                          (optionOneVotes / totalVotes) * 100
+                        )}
                         progress
                       />
                     </Message>
@@ -126,7 +128,9 @@ class Poll extends Component {
                       <Message.Header>{question.optionTwo.text}</Message.Header>
                       <p>{`${optionTwoVotes} out of ${totalVotes} votes`}</p>
                       <Progress
-                        percent={(optionTwoVotes / totalVotes) * 100}
+                        percent={Math.round(
+                          (optionTwoVotes / totalVotes) * 100
+                        )}
                         progress
                       />
                     </Message>
