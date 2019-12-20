@@ -13,11 +13,13 @@ class Nav extends Component {
   };
 
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, users } = this.props;
+    const user = users[authedUser];
+
     return (
       <div>
         {authedUser === null ? null : (
-          <Menu>
+          <Menu secondary>
             <Menu.Item as={NavLink} name="home" exact to="/">
               Home
             </Menu.Item>
@@ -30,13 +32,12 @@ class Nav extends Component {
               Leader Board
             </Menu.Item>
 
-            <Menu.Item
-              name="logOut"
-              position="right"
-              onClick={this.handleLogout}
-            >
-              Log Out
-            </Menu.Item>
+            <Menu.Menu position="right">
+              <Menu.Item>Hello, {user.name}!</Menu.Item>
+              <Menu.Item name="logOut" onClick={this.handleLogout}>
+                Log Out
+              </Menu.Item>
+            </Menu.Menu>
           </Menu>
         )}
       </div>
@@ -44,9 +45,10 @@ class Nav extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
   return {
-    authedUser
+    authedUser,
+    users
   };
 }
 

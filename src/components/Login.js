@@ -36,17 +36,19 @@ class Login extends Component {
     }
 
     return (
-      <div>
+      <div className="login-container">
         <Card>
           <Card.Content>
             <Card.Header>Login</Card.Header>
-            <Dropdown
-              placeholder="Select a user"
-              fluid
-              selection
-              options={userSelections}
-              onChange={this.handleChange}
-            />
+            <div className="login-dropdown">
+              <Dropdown
+                placeholder="Select a user"
+                fluid
+                selection
+                options={userSelections}
+                onChange={this.handleChange}
+              />
+            </div>
           </Card.Content>
           <Card.Content extra>
             <Button fluid basic onClick={this.handleSubmit}>

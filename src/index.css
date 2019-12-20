@@ -3,10 +3,6 @@ li {
   margin-top: 15px;
 }
 
-.ui input {
-  margin: 20px;
-}
-
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -31,6 +27,16 @@ li {
   padding-top: 75px;
   display: flex;
   justify-content: center;
+}
+
+.login-container {
+  padding-top: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-dropdown {
+  padding: 30px;
 }
 
 .dashboard-list-item {
