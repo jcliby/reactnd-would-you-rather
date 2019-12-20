@@ -7,7 +7,7 @@ import { Button, Card, Dropdown } from 'semantic-ui-react';
 class Login extends Component {
   state = {
     selectedUserId: '',
-    toHome: false
+    redirect: false
   };
 
   handleChange = (e, data) => {
@@ -23,23 +23,28 @@ class Login extends Component {
     dispatch(setAuthedUser(selectedUserId));
     this.setState(() => ({
       selectedUserId: '',
-      toHome: true
+      redirect: true
     }));
   };
 
   render() {
-    const { userSelections } = this.props;
-    const { toHome } = this.state;
+    const { userSelections, location } = this.props;
+    const { redirect } = this.state;
 
-    if (toHome === true) {
-      return <Redirect to="/" />;
+    const path =
+      location.state.redirectPath !== null ? location.state.redirectPath : '/';
+
+    if (redirect === true) {
+      return <Redirect to={path} />;
     }
 
     return (
       <div className="login-container">
         <Card>
           <Card.Content>
-            <Card.Header>Login</Card.Header>
+            <Card.Header textAlign="center">
+              Welcome to Would You Rather
+            </Card.Header>
             <div className="login-dropdown">
               <Dropdown
                 placeholder="Select a user"
@@ -52,7 +57,7 @@ class Login extends Component {
           </Card.Content>
           <Card.Content extra>
             <Button fluid basic onClick={this.handleSubmit}>
-              Submit
+              Login
             </Button>
           </Card.Content>
         </Card>
