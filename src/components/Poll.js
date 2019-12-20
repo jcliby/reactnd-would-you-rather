@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { handleAddAnswer } from '../actions/questions';
-import { Button, Card, Image, Radio, Message } from 'semantic-ui-react';
+import {
+  Button,
+  Card,
+  Image,
+  Radio,
+  Message,
+  Progress
+} from 'semantic-ui-react';
 import NoMatch from './NoMatch';
 
 class Poll extends Component {
@@ -34,6 +41,7 @@ class Poll extends Component {
 
   render() {
     const { authedUser, question, author, answer, redirect } = this.props;
+    const { value } = this.state;
 
     if (redirect === true) {
       return <NoMatch />;
@@ -77,7 +85,12 @@ class Poll extends Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <Button fluid basic onClick={this.handleSubmit}>
+                <Button
+                  fluid
+                  basic
+                  onClick={this.handleSubmit}
+                  disabled={value === ''}
+                >
                   Submit Answer
                 </Button>
               </Card.Content>
@@ -98,14 +111,26 @@ class Poll extends Component {
                   Created by {author.id === authedUser ? 'You' : author.name}
                 </Card.Meta>
                 <Card.Description>
-                  <Message color={answer === 'optionOne' ? 'green' : 'grey'}>
-                    <Message.Header>{question.optionOne.text}</Message.Header>
-                    <p>{`${optionOneVotes} out of ${totalVotes} votes`}</p>
-                  </Message>
-                  <Message color={answer === 'optionTwo' ? 'green' : 'grey'}>
-                    <Message.Header>{question.optionTwo.text}</Message.Header>
-                    <p>{`${optionTwoVotes} out of ${totalVotes} votes`}</p>
-                  </Message>
+                  <div className="poll-stats">
+                    <Message color={answer === 'optionOne' ? 'green' : 'grey'}>
+                      <Message.Header>{question.optionOne.text}</Message.Header>
+                      <p>{`${optionOneVotes} out of ${totalVotes} votes`}</p>
+                      <Progress
+                        percent={(optionOneVotes / totalVotes) * 100}
+                        progress
+                      />
+                    </Message>
+                  </div>
+                  <div className="poll-stats">
+                    <Message color={answer === 'optionTwo' ? 'green' : 'grey'}>
+                      <Message.Header>{question.optionTwo.text}</Message.Header>
+                      <p>{`${optionTwoVotes} out of ${totalVotes} votes`}</p>
+                      <Progress
+                        percent={(optionTwoVotes / totalVotes) * 100}
+                        progress
+                      />
+                    </Message>
+                  </div>
                 </Card.Description>
               </Card.Content>
             </Card>
@@ -117,7 +142,7 @@ class Poll extends Component {
 }
 
 function mapStateToProps({ authedUser, questions, users }, props) {
-  const { id } = props.match.params;
+  const id = props.match.params.question_id;
 
   let redirect = false;
   if (questions[id] === undefined) {

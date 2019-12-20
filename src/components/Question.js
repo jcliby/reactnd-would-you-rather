@@ -7,7 +7,7 @@ class Question extends Component {
   handleViewPoll = e => {
     e.preventDefault();
     const { history, id } = this.props;
-    history.push(`/question/${id}`);
+    history.push(`/questions/${id}`);
   };
 
   render() {

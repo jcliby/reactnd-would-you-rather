@@ -9,6 +9,11 @@ li {
   padding: 25px;
 }
 
+.poll-stats {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
 .dashboard-container {
   padding-top: 25px;
 }
