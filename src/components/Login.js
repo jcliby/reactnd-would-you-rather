@@ -29,7 +29,7 @@ class Login extends Component {
 
   render() {
     const { userSelections, location } = this.props;
-    const { redirect } = this.state;
+    const { redirect, selectedUserId } = this.state;
 
     const { from } = location.state || {
       from: { pathname: '/' }
@@ -57,7 +57,12 @@ class Login extends Component {
             </div>
           </Card.Content>
           <Card.Content extra>
-            <Button fluid basic onClick={this.handleSubmit}>
+            <Button
+              fluid
+              basic
+              onClick={this.handleSubmit}
+              disabled={selectedUserId === ''}
+            >
               Login
             </Button>
           </Card.Content>

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import LoadingBar from 'react-redux-loading-bar';
 import { handleInitialData } from '../actions/shared';
 import ProtectedRoute from './ProtectedRoute';
 import Dashboard from './Dashboard';
@@ -9,7 +10,6 @@ import Poll from './Poll';
 import NewQuestion from './NewQuestion';
 import Login from './Login';
 import Nav from './Nav';
-import LoadingBar from 'react-redux-loading';
 import NoMatch from './NoMatch';
 
 class App extends Component {
